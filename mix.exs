@@ -3,7 +3,7 @@ defmodule OttoApiClient.MixProject do
 
   def project do
     [
-      app: :otto_api_client,
+      app: :otto_api,
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
@@ -22,7 +22,8 @@ defmodule OttoApiClient.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.7.0"},
-      {:jason, "~> 1.2.2"}
+      {:jason, "~> 1.2.2"},
+      {:mox, "~> 1.0", only: :test}
     ]
   end
 end
