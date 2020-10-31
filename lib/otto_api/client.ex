@@ -36,7 +36,7 @@ defmodule OttoApi.Client do
     end
 
     defp request_without_body(verb, client, path) do
-        {:ok, response} = apply(@http_client, verb, [full_url(client.base_url, path), headers(client)])
+        {:ok, response} = apply(@http_client, verb, [full_url(client.base_url, path), headers(client), []])
         Jason.decode(response.body)
     end
 
