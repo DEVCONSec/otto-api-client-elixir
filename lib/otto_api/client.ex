@@ -18,12 +18,14 @@ defmodule OttoApi.Client do
     request_without_body(:get, client, path)
   end
 
-  @spec patch(client :: binary, path :: binary, body :: binary) :: {:ok, %{}} | {:error, message :: binary}
+  @spec patch(client :: binary, path :: binary, body :: binary) ::
+          {:ok, %{}} | {:error, message :: binary}
   def patch(client, path, body) do
     request_with_body(:patch, client, path, body)
   end
 
-  @spec post(client :: binary, path :: binary, body :: binary) :: {:ok, %{}} | {:error, message :: binary}
+  @spec post(client :: binary, path :: binary, body :: binary) ::
+          {:ok, %{}} | {:error, message :: binary}
   def post(client, path, body) do
     request_with_body(:post, client, path, body)
   end
@@ -33,7 +35,8 @@ defmodule OttoApi.Client do
     request_without_body(:delete, client, path)
   end
 
-  @spec put(client :: binary, path :: binary, body :: binary) :: {:ok, %{}} | {:error, message :: binary}
+  @spec put(client :: binary, path :: binary, body :: binary) ::
+          {:ok, %{}} | {:error, message :: binary}
   def put(client, path, body) do
     request_with_body(:put, client, path, body)
   end
