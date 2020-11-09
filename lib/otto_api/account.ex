@@ -4,6 +4,7 @@ defmodule OttoApi.Account do
 
   alias OttoApi.Client
 
+
   @spec all(client :: %Client{}) ::
           {:ok,
            list(%__MODULE__{id: binary, name: binary, description: binary, inserted_at: binary})}
