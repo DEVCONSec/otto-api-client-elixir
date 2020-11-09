@@ -16,11 +16,13 @@ defmodule AccountTest do
 
     assert OttoApi.Account.all(api) ==
              {:ok,
-              %OttoApi.Account{
-                id: "c9572706-36e5-48c2-86be-7429ae4c3bae",
-                name: "a name",
-                description: "a description",
-                inserted_at: "when"
-              }}
+              [
+                %OttoApi.Account{
+                  id: "c9572706-36e5-48c2-86be-7429ae4c3bae",
+                  name: "a name",
+                  description: "a description",
+                  inserted_at: "when"
+                }
+              ]}
   end
 end

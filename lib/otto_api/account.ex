@@ -5,15 +5,22 @@ defmodule OttoApi.Account do
   alias OttoApi.Client
 
   @spec all(client :: %Client{}) ::
-          {:ok, %__MODULE__{id: binary, name: binary, description: binary, inserted_at: binary}}
+          {:ok,
+           list(%__MODULE__{id: binary, name: binary, description: binary, inserted_at: binary})}
   def all(client) do
     {:ok,
      %{
-       "data" => [
-         %{"id" => id, "name" => name, "description" => description, "inserted_at" => inserted_at}
-       ]
+       "data" => records
      }} = Client.get(client, "/accounts")
 
-    {:ok, %__MODULE__{id: id, name: name, description: description, inserted_at: inserted_at}}
+    accounts =
+      Enum.map(records, fn record ->
+        %{"id" => id, "name" => name, "description" => description, "inserted_at" => inserted_at} =
+          record
+
+        %__MODULE__{id: id, name: name, description: description, inserted_at: inserted_at}
+      end)
+
+    {:ok, accounts}
   end
 end
