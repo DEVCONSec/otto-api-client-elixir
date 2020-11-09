@@ -4,26 +4,42 @@ defmodule OttoApi.Client do
   @enforce_keys [:jwt, :client_id, :base_url]
   defstruct @enforce_keys
 
+
+  @spec new(jwt :: binary, client_id :: binary, base_url :: binary) :: %__MODULE__{
+          jwt: binary,
+          client_id: binary,
+          base_url: binary
+        }
   def new(jwt, client_id, base_url) do
     %__MODULE__{jwt: jwt, client_id: client_id, base_url: base_url}
   end
 
+  @spec get(client :: binary, path :: binary) :: {:ok, %{}} | {:error, message :: binary}
   def get(client, path) do
     request_without_body(:get, client, path)
   end
 
+  @spec patch(client :: binary, path :: binary, body :: binary) ::
+          {:ok, %{}} | {:error, message :: binary}
   def patch(client, path, body) do
     request_with_body(:patch, client, path, body)
   end
 
+  @spec post(client :: binary, path :: binary, body :: binary) ::
+          {:ok, %{}} | {:error, message :: binary}
   def post(client, path, body) do
     request_with_body(:post, client, path, body)
   end
 
+
+  @spec delete(client :: binary, path :: binary) :: {:ok, %{}} | {:error, message :: binary}
   def delete(client, path) do
     request_without_body(:delete, client, path)
   end
 
+
+  @spec put(client :: binary, path :: binary, body :: binary) ::
+          {:ok, %{}} | {:error, message :: binary}
   def put(client, path, body) do
     request_with_body(:put, client, path, body)
   end
