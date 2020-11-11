@@ -4,7 +4,6 @@ defmodule OttoApi.Account do
 
   alias OttoApi.Client
 
-
   @spec all(client :: %Client{}) ::
           {:ok,
            list(%__MODULE__{id: binary, name: binary, description: binary, inserted_at: binary})}
@@ -23,5 +22,9 @@ defmodule OttoApi.Account do
       end)
 
     {:ok, accounts}
+  end
+
+  def create(client, account) do
+    {:ok, _response} = Client.post(client, "/accounts", %{"account" => Map.from_struct(account)})
   end
 end
