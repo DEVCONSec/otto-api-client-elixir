@@ -4,7 +4,6 @@ defmodule OttoApi.Client do
   @enforce_keys [:jwt, :client_id, :base_url]
   defstruct @enforce_keys
 
-
   @spec new(jwt :: binary, client_id :: binary, base_url :: binary) :: %__MODULE__{
           jwt: binary,
           client_id: binary,
@@ -31,12 +30,10 @@ defmodule OttoApi.Client do
     request_with_body(:post, client, path, body)
   end
 
-
   @spec delete(client :: binary, path :: binary) :: {:ok, %{}} | {:error, message :: binary}
   def delete(client, path) do
     request_without_body(:delete, client, path)
   end
-
 
   @spec put(client :: binary, path :: binary, body :: binary) ::
           {:ok, %{}} | {:error, message :: binary}
@@ -49,10 +46,12 @@ defmodule OttoApi.Client do
       {:ok, response} =
         apply(@http_client, verb, [full_url(client.base_url, path), json, headers(client), []])
 
-      body = case response.body do
-        "" -> %{}
-        _ ->  Jason.decode(response.body)
-      end
+      body =
+        case response.body do
+          "" -> %{}
+          _ -> Jason.decode(response.body)
+        end
+
       {:ok, body}
     end
   end
