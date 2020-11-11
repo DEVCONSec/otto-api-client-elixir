@@ -26,6 +26,5 @@ defmodule OttoApi.Account do
 
   def create(client, account) do
     {:ok, response} = Client.post(client, "/accounts", %{"account" => Map.from_struct(account)})
-    {:ok, response}
   end
 end
