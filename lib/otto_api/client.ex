@@ -47,9 +47,13 @@ defmodule OttoApi.Client do
   defp request_with_body(verb, client, path, body) do
     with {:ok, json} <- Jason.encode(body) do
       {:ok, response} =
-        apply(@http_client, verb, [full_url(client.base_url, path), json, headers(client)])
+        apply(@http_client, verb, [full_url(client.base_url, path), json, headers(client), []])
 
-      Jason.decode(response.body)
+      body = case response.body do
+        "" -> %{}
+        _ ->  Jason.decode(response.body)
+      end
+      {:ok, body}
     end
   end
 
