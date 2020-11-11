@@ -25,6 +25,6 @@ defmodule OttoApi.Site do
   end
 
   def create(client, site) do
-    {:ok, response} = Client.post(client, "/sites", %{"site" => Map.from_struct(site)})
+    {:ok, _response} = Client.post(client, "/sites", %{"site" => Map.from_struct(site)})
   end
 end
