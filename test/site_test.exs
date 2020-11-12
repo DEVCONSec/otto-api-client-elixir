@@ -27,17 +27,26 @@ defmodule Site do
   end
 
   test "can create site from struct" do
-    site  = %{
+    site = %{
       url: "https://example.com",
-      account_id: "account's id",
+      account_id: "account's id"
     }
 
     request_body = Jason.encode!(site)
     api = OttoApi.Client.new("jwt", "client id", "http://example.com/api/v2")
 
-    OttoApi.Http.MockClient
-    |> expect(:post, fn _url, request_body, _headers, _options -> {:ok, %{body: ""}} end)
+    response_body = """
+    {"data":{"id":"123456", 
+              "url":"https://example.com", 
+              "account_id":"account's id", 
+              "inserted_at": "when"
+              }
+            }
+    """
 
-    assert OttoApi.Site.create(api, site) == {:ok, %{}}
+    OttoApi.Http.MockClient
+    |> expect(:post, fn _url, request_body, _headers, _options -> {:ok, %{body: response_body}} end)
+
+    assert OttoApi.Site.create(api, site) == {:ok, %OttoApi.Site{url: "https://example.com", account_id: "account's id", id: "123456", inserted_at: "when"}}
   end
 end

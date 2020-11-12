@@ -25,6 +25,14 @@ defmodule OttoApi.Site do
   end
 
   def create(client, site_attributes) do
-    {:ok, _response} = Client.post(client, "/sites", %{"site" => site_attributes})
+    {:ok, %{"data" => site_attributes}} = Client.post(client, "/sites", %{"site" => site_attributes})
+
+    {:ok,
+     %__MODULE__{
+       id: site_attributes["id"],
+       url: site_attributes["url"],
+       account_id: site_attributes["account_id"],
+       inserted_at: site_attributes["inserted_at"]
+     }}
   end
 end

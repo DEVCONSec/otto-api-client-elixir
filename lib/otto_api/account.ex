@@ -1,5 +1,5 @@
 defmodule OttoApi.Account do
-  @enforce_keys [ :name, :description ]
+  @enforce_keys [:name, :description]
   defstruct @enforce_keys ++ [:id, :inserted_at]
 
   alias OttoApi.Client
@@ -25,7 +25,15 @@ defmodule OttoApi.Account do
   end
 
   def create(client, account_attributes) do
-    {:ok, _response} = Client.post(client, "/accounts", %{"account" => account_attributes})
+    {:ok, %{"data" => account_attributes}} =
+      Client.post(client, "/accounts", %{"account" => account_attributes})
+
+    {:ok,
+     %__MODULE__{
+       id: account_attributes["id"],
+       name: account_attributes["name"],
+       description: account_attributes["description"],
+       inserted_at: account_attributes["inserted_at"]
+     }}
   end
 end
-
