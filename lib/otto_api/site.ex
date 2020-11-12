@@ -1,6 +1,6 @@
 defmodule OttoApi.Site do
-  @enforce_keys [:id, :url, :account_id, :inserted_at]
-  defstruct @enforce_keys
+  @enforce_keys [:url, :account_id]
+  defstruct @enforce_keys ++ [:id, :inserted_at]
 
   alias OttoApi.Client
 
@@ -24,7 +24,7 @@ defmodule OttoApi.Site do
     {:ok, accounts}
   end
 
-  def create(client, site) do
-    {:ok, _response} = Client.post(client, "/sites", %{"site" => Map.from_struct(site)})
+  def create(client, site_attributes) do
+    {:ok, _response} = Client.post(client, "/sites", %{"site" => site_attributes})
   end
 end

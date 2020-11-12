@@ -27,14 +27,12 @@ defmodule Site do
   end
 
   test "can create site from struct" do
-    site  = %OttoApi.Site{
-      id: "lkjsdflksfdj",
+    site  = %{
       url: "https://example.com",
       account_id: "account's id",
-      inserted_at: "when"
     }
 
-    request_body = Jason.encode!(Map.from_struct(site))
+    request_body = Jason.encode!(site)
     api = OttoApi.Client.new("jwt", "client id", "http://example.com/api/v2")
 
     OttoApi.Http.MockClient

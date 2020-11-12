@@ -2,7 +2,7 @@ defmodule OttoApiClientTest do
   use ExUnit.Case
   import Mox
 
-  doctest OttoApiClient
+  doctest OttoApi.Client
   setup :verify_on_exit!
 
   test "does a GET" do

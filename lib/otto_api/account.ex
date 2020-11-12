@@ -1,6 +1,6 @@
 defmodule OttoApi.Account do
-  @enforce_keys [:id, :name, :description, :inserted_at]
-  defstruct @enforce_keys
+  @enforce_keys [ :name, :description ]
+  defstruct @enforce_keys ++ [:id, :inserted_at]
 
   alias OttoApi.Client
 
@@ -24,7 +24,8 @@ defmodule OttoApi.Account do
     {:ok, accounts}
   end
 
-  def create(client, account) do
-    {:ok, _response} = Client.post(client, "/accounts", %{"account" => Map.from_struct(account)})
+  def create(client, account_attributes) do
+    {:ok, _response} = Client.post(client, "/accounts", %{"account" => account_attributes})
   end
 end
+
