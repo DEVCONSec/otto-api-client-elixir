@@ -29,15 +29,25 @@ defmodule AccountTest do
   test "can create account on service from struct" do
     account = %{
       name: "a name",
-      description: "a description",
+      description: "a description"
     }
 
     request_body = Jason.encode!(account)
     api = OttoApi.Client.new("jwt", "client id", "http://example.com/api/v2")
 
-    OttoApi.Http.MockClient
-    |> expect(:post, fn _url, request_body, _headers, _options -> {:ok, %{body: ""}} end)
+    response_body = """
+    {"data":{"id":"123456", 
+              "name":"the name", 
+              "description":"the description", 
+              "inserted_at": "when"
+              }
+            }
+    """
 
-    assert OttoApi.Account.create(api, account) == {:ok, %{}}
+    OttoApi.Http.MockClient
+    |> expect(:post, fn _url, request_body, _headers, _options -> {:ok, %{body: response_body}} end)
+
+    assert OttoApi.Account.create(api, account) ==
+             {:ok, %OttoApi.Account{id: "123456", name: "the name", description: "the description", inserted_at: "when"}}
   end
 end
