@@ -27,14 +27,12 @@ defmodule AccountTest do
   end
 
   test "can create account on service from struct" do
-    account = %OttoApi.Account{
-      id: "lkjsdflksfdj",
+    account = %{
       name: "a name",
       description: "a description",
-      inserted_at: "when"
     }
 
-    request_body = Jason.encode!(Map.from_struct(account))
+    request_body = Jason.encode!(account)
     api = OttoApi.Client.new("jwt", "client id", "http://example.com/api/v2")
 
     OttoApi.Http.MockClient

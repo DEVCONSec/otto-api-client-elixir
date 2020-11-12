@@ -1,4 +1,4 @@
-defmodule OttoApiClient.MixProject do
+defmodule OttoApi.MixProject do
   use Mix.Project
 
   def project do
