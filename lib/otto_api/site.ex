@@ -15,10 +15,10 @@ defmodule OttoApi.Site do
 
     accounts =
       Enum.map(records, fn record ->
-        %{"id" => id, "url" => url, "account_id" => account_id, "inserted_at" => inserted_at} =
+        %{"id" => id, "url" => url, "name" => name,  "account_id" => account_id, "inserted_at" => inserted_at} =
           record
 
-        %__MODULE__{id: id, url: url, account_id: account_id, inserted_at: inserted_at}
+        %__MODULE__{id: id, url: url, name: name, account_id: account_id, inserted_at: inserted_at}
       end)
 
     {:ok, accounts}
@@ -31,6 +31,7 @@ defmodule OttoApi.Site do
      %__MODULE__{
        id: site_attributes["id"],
        url: site_attributes["url"],
+       name: site_attributes["name"]
        account_id: site_attributes["account_id"],
        inserted_at: site_attributes["inserted_at"]
      }}
