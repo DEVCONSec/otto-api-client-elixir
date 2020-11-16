@@ -6,7 +6,7 @@ defmodule OttoApi.Url do
 
   @spec all(client :: %Client{}) ::
           {:ok,
-           list(%__MODULE__{id: binary, url: binary, account_id: binary, inserted_at: binary})}
+           list(%__MODULE__{id: binary, url: binary, site_id: binary, inserted_at: binary})}
   def all(client) do
     {:ok,
      %{
