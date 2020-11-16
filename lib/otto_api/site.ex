@@ -1,5 +1,5 @@
 defmodule OttoApi.Site do
-  @enforce_keys [:url, :account_id]
+  @enforce_keys [:url, :account_id, :name]
   defstruct @enforce_keys ++ [:id, :inserted_at]
 
   alias OttoApi.Client
