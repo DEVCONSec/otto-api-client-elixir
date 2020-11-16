@@ -31,7 +31,7 @@ defmodule OttoApi.Site do
      %__MODULE__{
        id: site_attributes["id"],
        url: site_attributes["url"],
-       name: site_attributes["name"]
+       name: site_attributes["name"],
        account_id: site_attributes["account_id"],
        inserted_at: site_attributes["inserted_at"]
      }}
