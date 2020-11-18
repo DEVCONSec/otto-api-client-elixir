@@ -48,8 +48,18 @@ defmodule Site do
     """
 
     OttoApi.Http.MockClient
-    |> expect(:post, fn _url, request_body, _headers, _options -> {:ok, %{body: response_body}} end)
+    |> expect(:post, fn _url, request_body, _headers, _options ->
+      {:ok, %{body: response_body}}
+    end)
 
-    assert OttoApi.Site.create(api, site) == {:ok, %OttoApi.Site{url: "https://example.com", name: "DEVCON", account_id: "account's id", id: "123456", inserted_at: "when"}}
+    assert OttoApi.Site.create(api, site) ==
+             {:ok,
+              %OttoApi.Site{
+                url: "https://example.com",
+                name: "DEVCON",
+                account_id: "account's id",
+                id: "123456",
+                inserted_at: "when"
+              }}
   end
 end

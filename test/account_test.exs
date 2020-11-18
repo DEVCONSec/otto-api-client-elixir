@@ -45,9 +45,17 @@ defmodule AccountTest do
     """
 
     OttoApi.Http.MockClient
-    |> expect(:post, fn _url, request_body, _headers, _options -> {:ok, %{body: response_body}} end)
+    |> expect(:post, fn _url, request_body, _headers, _options ->
+      {:ok, %{body: response_body}}
+    end)
 
     assert OttoApi.Account.create(api, account) ==
-             {:ok, %OttoApi.Account{id: "123456", name: "the name", description: "the description", inserted_at: "when"}}
+             {:ok,
+              %OttoApi.Account{
+                id: "123456",
+                name: "the name",
+                description: "the description",
+                inserted_at: "when"
+              }}
   end
 end
