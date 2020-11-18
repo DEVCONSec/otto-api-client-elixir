@@ -24,15 +24,15 @@ defmodule OttoApi.Url do
     {:ok, urls}
   end
 
-  def create(client, site_attributes) do
-    {:ok, %{"data" => site_attributes}} = Client.post(client, "/urls", %{"url" => site_attributes})
+  def create(client, url_attributes) do
+    {:ok, %{"data" => url_data}} = Client.post(client, "/urls", %{"url" => url_attributes})
 
     {:ok,
      %__MODULE__{
-       id: site_attributes["id"],
-       url: site_attributes["url"],
-       site_id: site_attributes["site_id"],
-       inserted_at: site_attributes["inserted_at"]
+       id: url_data["id"],
+       url: url_data["url"],
+       site_id: url_data["site_id"],
+       inserted_at: url_data["inserted_at"]
      }}
   end
 end
