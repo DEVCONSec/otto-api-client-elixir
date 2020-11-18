@@ -1,17 +1,18 @@
 defmodule OttoApi.Url do
-  @enforce_keys [:url, :site_id]
+  @enforce_keys [:url,:site_id]
   defstruct @enforce_keys ++ [:id, :inserted_at]
 
   alias OttoApi.Client
 
-  @spec all(client :: %Client{}) ::
+  @spec all(client :: %Client{}, account_id :: binary, site_id :: binary) ::
           {:ok,
            list(%__MODULE__{id: binary, url: binary, site_id: binary, inserted_at: binary})}
-  def all(client) do
+
+  def all(client, account_id, site_id) do
     {:ok,
      %{
        "data" => records
-     }} = Client.get(client, "/urls")
+     }} = Client.get(client, "/accounts/#{account_id}/sites/#{site_id}/urls")
 
     urls =
       Enum.map(records, fn record ->
@@ -24,8 +25,8 @@ defmodule OttoApi.Url do
     {:ok, urls}
   end
 
-  def create(client, url_attributes) do
-    {:ok, %{"data" => url_data}} = Client.post(client, "/urls", %{"url" => url_attributes})
+  def create(client, account_id, url_attributes) do
+    {:ok, %{"data" => url_data}} = Client.post(client, "/accounts/#{account_id}/sites/#{url_attributes["site_id"]}/urls", %{"url" => url_attributes})
 
     {:ok,
      %__MODULE__{
