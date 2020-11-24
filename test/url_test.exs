@@ -45,9 +45,17 @@ defmodule UrlTest do
     """
 
     OttoApi.Http.MockClient
-    |> expect(:post, fn _url, request_body, _headers, _options -> {:ok, %{body: response_body}} end)
+    |> expect(:post, fn _url, request_body, _headers, _options ->
+      {:ok, %{body: response_body}}
+    end)
 
     assert OttoApi.Url.create(api, "123456", url) ==
-             {:ok, %OttoApi.Url{id: "123456", url: "https://www.example.com", site_id: "123456", inserted_at: "when"}}
+             {:ok,
+              %OttoApi.Url{
+                id: "123456",
+                url: "https://www.example.com",
+                site_id: "123456",
+                inserted_at: "when"
+              }}
   end
 end

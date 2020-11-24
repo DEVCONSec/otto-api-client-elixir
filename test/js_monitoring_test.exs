@@ -60,16 +60,20 @@ defmodule JsMonitoringJobTest do
     """
 
     OttoApi.Http.MockClient
-    |> expect(:post, fn _url, request_body, _headers, _options -> {:ok, %{body: response_body}} end)
+    |> expect(:post, fn _url, request_body, _headers, _options ->
+      {:ok, %{body: response_body}}
+    end)
 
     assert OttoApi.JsMonitoringJob.create(api, job) ==
-             {:ok, %OttoApi.JsMonitoringJob{
-               id: "123456",
-               site_id: "123456",
-               synthetic_check_frequency: "1",
-               synthetic_check_location_usa: true,
-               synthetic_check_location_global: false,
-               data_retention_period_in_days: 1,
-               inserted_at: "when"}}
+             {:ok,
+              %OttoApi.JsMonitoringJob{
+                id: "123456",
+                site_id: "123456",
+                synthetic_check_frequency: "1",
+                synthetic_check_location_usa: true,
+                synthetic_check_location_global: false,
+                data_retention_period_in_days: 1,
+                inserted_at: "when"
+              }}
   end
 end
