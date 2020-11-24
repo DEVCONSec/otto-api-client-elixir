@@ -13,7 +13,7 @@ defmodule OttoApi.Site do
        "data" => records
      }} = Client.get(client, "/sites")
 
-    accounts =
+    sites =
       Enum.map(records, fn record ->
         %{"id" => id, "url" => url, "name" => name,  "account_id" => account_id, "inserted_at" => inserted_at} =
           record
@@ -21,7 +21,7 @@ defmodule OttoApi.Site do
         %__MODULE__{id: id, url: url, name: name, account_id: account_id, inserted_at: inserted_at}
       end)
 
-    {:ok, accounts}
+    {:ok, sites}
   end
 
 
