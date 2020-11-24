@@ -13,7 +13,7 @@ defmodule OttoApi.Client do
     %__MODULE__{jwt: jwt, client_id: client_id, base_url: base_url}
   end
 
-  @spec get(client :: binary, path :: binary) :: {:ok, %{}} | {:error, message :: binary}
+  @spec get(client :: %__MODULE__{}, path :: binary) :: {:ok, %{}} | {:error, message :: binary}
   def get(client, path) do
     request_without_body(:get, client, path)
   end
@@ -24,13 +24,13 @@ defmodule OttoApi.Client do
     request_with_body(:patch, client, path, body)
   end
 
-  @spec post(client :: binary, path :: binary, body :: binary) ::
-          {:ok, %{}} | {:error, message :: binary}
+  @spec post(client :: binary, path :: binary, body :: map) ::
+          {:ok, map} | {:error, message :: binary}
   def post(client, path, body) do
     request_with_body(:post, client, path, body)
   end
 
-  @spec delete(client :: binary, path :: binary) :: {:ok, %{}} | {:error, message :: binary}
+  @spec delete(client :: %__MODULE__{}, path :: binary) :: {:ok, %{}} | {:error, message :: binary}
   def delete(client, path) do
     request_without_body(:delete, client, path)
   end
