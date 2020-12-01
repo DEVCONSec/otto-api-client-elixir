@@ -1,6 +1,6 @@
 defmodule OttoApi.Alert do
   @enforce_keys [:site_id]
-  defstruct @enforce_keys ++ [:id, :inserted_at, :alert_type_id, :description]
+  defstruct @enforce_keys ++ [:id, :alert_type_id, :description]
 
   alias OttoApi.Client
 
