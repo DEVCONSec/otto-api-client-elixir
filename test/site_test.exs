@@ -35,7 +35,7 @@ defmodule Site do
     }
 
     request_body = Jason.encode!(site)
-    api = OttoApi.Client.new("jwt", "client id", "http://example.com/api/v2")
+    api = OttoApi.Client.new("jwt", "http://example.com/api/v2")
 
     response_body = """
     {"data":{"id":"123456",
