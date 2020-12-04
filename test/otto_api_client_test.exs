@@ -10,7 +10,7 @@ defmodule OttoApiClientTest do
     ["a", "b", "c"]
     """
 
-    api = OttoApi.Client.new("jwt", "client id", "http://example.com/api/v2")
+    api = OttoApi.Client.new("jwt", "http://example.com/api/v2")
 
     OttoApi.Http.MockClient
     |> expect(:get, fn _url, _headers, _options -> {:ok, %{body: stub_json}} end)

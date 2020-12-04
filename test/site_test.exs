@@ -9,7 +9,7 @@ defmodule Site do
     {"data":[{"id":"c9572706-36e5-48c2-86be-7429ae4c3bae", "name": "DEVCON", "url":"https://example.com", "account_id":"an account id", "inserted_at":"when"}]}
     """
 
-    api = OttoApi.Client.new("jwt", "client id", "http://example.com/api/v2")
+    api = OttoApi.Client.new("jwt", "http://example.com/api/v2")
 
     OttoApi.Http.MockClient
     |> expect(:get, fn _url, _headers, _options -> {:ok, %{body: stub_json}} end)
