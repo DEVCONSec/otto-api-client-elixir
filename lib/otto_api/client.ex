@@ -1,16 +1,15 @@
 defmodule OttoApi.Client do
   @http_client Application.get_env(:otto_api, :http_client, OttoApi.Http.Client)
 
-  @enforce_keys [:jwt, :client_id, :base_url]
+  @enforce_keys [:jwt, :base_url]
   defstruct @enforce_keys
 
-  @spec new(jwt :: binary, client_id :: binary, base_url :: binary) :: %__MODULE__{
+  @spec new(jwt :: binary,  base_url :: binary) :: %__MODULE__{
           jwt: binary,
-          client_id: binary,
           base_url: binary
         }
-  def new(jwt, client_id, base_url) do
-    %__MODULE__{jwt: jwt, client_id: client_id, base_url: base_url}
+  def new(jwt, base_url) do
+    %__MODULE__{jwt: jwt, base_url: base_url}
   end
 
   @spec get(client :: %__MODULE__{}, path :: binary) :: {:ok, %{}} | {:error, message :: binary}
