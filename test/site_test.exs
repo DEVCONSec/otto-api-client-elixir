@@ -14,7 +14,7 @@ defmodule Site do
     OttoApi.Http.MockClient
     |> expect(:get, fn _url, _headers, _options -> {:ok, %{body: stub_json}} end)
 
-    assert OttoApi.Site.all(api) ==
+    assert OttoApi.Site.all(api, "an account id") ==
              {:ok,
               [
                 %OttoApi.Site{
@@ -52,7 +52,7 @@ defmodule Site do
       {:ok, %{body: response_body}}
     end)
 
-    assert OttoApi.Site.create(api, site) ==
+    assert OttoApi.Site.create(api, "account's id", site) ==
              {:ok,
               %OttoApi.Site{
                 url: "https://example.com",
