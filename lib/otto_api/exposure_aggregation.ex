@@ -25,7 +25,7 @@ defmodule OttoApi.ExposureAggregation do
      }} =
       Client.get(
         client,
-        "/accounts/#{account_id}/sites/#{site_id}/incidents/#{incident_id}/incident_aggregations"
+        "/accounts/#{account_id}/sites/#{site_id}/incidents/#{incident_id}/exposure_aggregations"
       )
 
     %{
