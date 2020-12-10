@@ -18,7 +18,7 @@ defmodule JsMonitoringJobTest do
     api = OttoApi.Client.new("jwt", "http://example.com/api/v2")
 
     OttoApi.Http.MockClient
-    |> expect(:get, fn _url, _headers, _options -> {:ok, %{body: stub_json}} end)
+    |> expect(:get, fn _url, _headers, _options -> {:ok, %{status_code: 200, body: stub_json}} end)
 
     assert OttoApi.JsMonitoringJob.all(api) ==
              {:ok,
@@ -61,7 +61,7 @@ defmodule JsMonitoringJobTest do
 
     OttoApi.Http.MockClient
     |> expect(:post, fn _url, request_body, _headers, _options ->
-      {:ok, %{body: response_body}}
+      {:ok, %{status_code: 200, body: response_body}}
     end)
 
     assert OttoApi.JsMonitoringJob.create(api, job) ==

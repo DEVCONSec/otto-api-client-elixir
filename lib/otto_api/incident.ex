@@ -1,5 +1,20 @@
 defmodule OttoApi.Incident do
-  @enforce_keys [:account_id, :site_id, :threat_id, :dom_location, :event_name, :ignored, :resolved, :blocked,:is_blocked, :stack_trace, :url_found_on, :source_code, :first_seen, :last_seen]
+  @enforce_keys [
+    :account_id,
+    :site_id,
+    :threat_id,
+    :dom_location,
+    :event_name,
+    :ignored,
+    :resolved,
+    :blocked,
+    :is_blocked,
+    :stack_trace,
+    :url_found_on,
+    :source_code,
+    :first_seen,
+    :last_seen
+  ]
   defstruct @enforce_keys ++ [:id]
 
   alias OttoApi.Client
@@ -7,11 +22,11 @@ defmodule OttoApi.Incident do
   @spec all(client :: %Client{}) ::
           {:ok,
            list(%__MODULE__{
-            id: binary,
-            account_id: binary,
-            site_id: binary,
-            threat_id: binary,
-            dom_location: string,
+             id: binary,
+             account_id: binary,
+             site_id: binary,
+             threat_id: binary,
+             dom_location: string,
              event_name: string,
              ignored: boolean,
              resolved: boolean,
@@ -29,24 +44,25 @@ defmodule OttoApi.Incident do
      %{
        "data" => records
      }} = Client.get(client, "/incidents")
+
     incidents =
       Enum.map(records, fn record ->
         %{
-        "id" => id,
-        "account_id" => account_id,
-        "site_id" => site_id,
-        "threat_id" => threat_id,
-        "dom_location" => dom_location,
-        "event_name" => event_name,
-        "ignored" => ignored,
-        "resolved" => resolved,
-        "blocked" => blocked,
-        "is_blocked" => is_blocked,
-        "stack_trace" => stack_trace,
-        "url_found_on" => url_found_on,
-        "source_code" => source_code,
-        "first_seen" => first_seen,
-        "last_seen" => last_seen
+          "id" => id,
+          "account_id" => account_id,
+          "site_id" => site_id,
+          "threat_id" => threat_id,
+          "dom_location" => dom_location,
+          "event_name" => event_name,
+          "ignored" => ignored,
+          "resolved" => resolved,
+          "blocked" => blocked,
+          "is_blocked" => is_blocked,
+          "stack_trace" => stack_trace,
+          "url_found_on" => url_found_on,
+          "source_code" => source_code,
+          "first_seen" => first_seen,
+          "last_seen" => last_seen
         } = record
 
         %__MODULE__{

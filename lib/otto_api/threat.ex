@@ -24,5 +24,4 @@ defmodule OttoApi.Threat do
 
     {:ok, threats}
   end
-
 end
