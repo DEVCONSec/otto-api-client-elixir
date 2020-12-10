@@ -43,7 +43,6 @@ defmodule OttoApi.JavascriptLibraryUsage do
     {:ok, javascript_library_usages}
   end
 
-
   def create(client,
         javascript_source_id: javascript_source_id,
         javascript_library_id: javascript_library_id

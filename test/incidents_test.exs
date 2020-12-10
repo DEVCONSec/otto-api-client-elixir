@@ -29,7 +29,7 @@ defmodule IncidentsTest do
     api = OttoApi.Client.new("jwt", "http://example.com/api/v2")
 
     OttoApi.Http.MockClient
-    |> expect(:get, fn _url, _headers, _options -> {:ok, %{body: stub_json}} end)
+    |> expect(:get, fn _url, _headers, _options -> {:ok, %{status_code: 200, body: stub_json}} end)
 
     assert OttoApi.Incident.all(api) ==
              {:ok,
@@ -54,7 +54,6 @@ defmodule IncidentsTest do
               ]}
   end
 
-
   test "get threats" do
     stub_json = """
     {"data":[{
@@ -69,7 +68,7 @@ defmodule IncidentsTest do
     api = OttoApi.Client.new("jwt", "http://example.com/api/v2")
 
     OttoApi.Http.MockClient
-    |> expect(:get, fn _url, _headers, _options -> {:ok, %{body: stub_json}} end)
+    |> expect(:get, fn _url, _headers, _options -> {:ok, %{status_code: 200, body: stub_json}} end)
 
     assert OttoApi.Threat.all(api) ==
              {:ok,
@@ -78,11 +77,10 @@ defmodule IncidentsTest do
                   id: "123456",
                   name: "Threat Name",
                   description: "Threat Description",
-                  severity: 1,
+                  severity: 1
                 }
               ]}
   end
-
 
   test "get exposure aggregations" do
     stub_json = """
@@ -98,18 +96,15 @@ defmodule IncidentsTest do
     api = OttoApi.Client.new("jwt", "http://example.com/api/v2")
 
     OttoApi.Http.MockClient
-    |> expect(:get, fn _url, _headers, _options -> {:ok, %{body: stub_json}} end)
+    |> expect(:get, fn _url, _headers, _options -> {:ok, %{status_code: 200, body: stub_json}} end)
 
     assert OttoApi.ExposureAggregation.get(api, "123456", "123456", "123456") ==
              {:ok,
-                %OttoApi.ExposureAggregation{
-                  count: 100,
-                  unique_clients: 12,
-                  unique_mobile: 6,
-                  unique_desktop: 6
-                }
-              }
+              %OttoApi.ExposureAggregation{
+                count: 100,
+                unique_clients: 12,
+                unique_mobile: 6,
+                unique_desktop: 6
+              }}
   end
-
-
 end
