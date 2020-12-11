@@ -26,7 +26,7 @@ defmodule OttoApi.Url do
   def create(client, account_id, url_attributes) do
     {:ok, %{"data" => url_data}} =
       Client.post(client, "/accounts/#{account_id}/sites/#{url_attributes["site_id"]}/urls", %{
-        "url" => url_attributes
+        "url" => url_attributes["url"]
       })
 
     {:ok,
