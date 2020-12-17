@@ -14,7 +14,7 @@ defmodule OttoApi.NetworkRequest do
     :first_seen,
     :last_seen
   ]
-  defstruct @enforce_keys ++ [:id]
+  defstruct @enforce_keys ++ [:id, :url_found_on]
 
   alias OttoApi.Client
 
@@ -34,6 +34,7 @@ defmodule OttoApi.NetworkRequest do
              blocked: boolean,
              is_blocked: boolean,
              first_seen: binary,
+             url_found_on: binary,
              last_seen: binary
            })}
 
@@ -58,6 +59,7 @@ defmodule OttoApi.NetworkRequest do
           "blocked" => blocked,
           "is_blocked" => is_blocked,
           "first_seen" => first_seen,
+          "url_found_on" => url_found_on,
           "last_seen" => last_seen
         } = record
 
@@ -75,6 +77,7 @@ defmodule OttoApi.NetworkRequest do
           blocked: blocked,
           is_blocked: is_blocked,
           first_seen: first_seen,
+          url_found_on: url_found_on,
           last_seen: last_seen
         }
       end)
@@ -102,6 +105,7 @@ defmodule OttoApi.NetworkRequest do
       "blocked" => blocked,
       "is_blocked" => is_blocked,
       "first_seen" => first_seen,
+      "url_found_on" => url_found_on,
       "last_seen" => last_seen
     } = record
 
@@ -119,6 +123,7 @@ defmodule OttoApi.NetworkRequest do
           blocked: blocked,
           is_blocked: is_blocked,
           first_seen: first_seen,
+          url_found_on: url_found_on,
           last_seen: last_seen
     }
 
