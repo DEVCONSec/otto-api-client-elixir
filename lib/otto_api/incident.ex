@@ -132,4 +132,11 @@ defmodule OttoApi.Incident do
 
     {:ok, incident}
   end
+
+  def update_state(client, account_id, site_id, incident_id, new_state) do
+    {:ok,
+     %{
+       "data" => record
+     }} = Client.put(client, "/accounts/#{account_id}/sites/#{site_id}/incidents/#{incident_id}", %{state: new_state})
+  end
 end
