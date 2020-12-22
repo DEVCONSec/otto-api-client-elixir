@@ -133,10 +133,35 @@ defmodule OttoApi.Incident do
     {:ok, incident}
   end
 
+  def ignore(client, account_id, site_id, incident_id) do
+    update_state(client, account_id, site_id, incident_id, %{ignored: true})
+  end
+
+  def resolve(client, account_id, site_id, incident_id) do
+    update_state(client, account_id, site_id, incident_id, %{resolved: true})
+  end
+
+  def block(client, account_id, site_id, incident_id) do
+    update_state(client, account_id, site_id, incident_id, %{blocked: true})
+  end
+
+  def unignore(client, account_id, site_id, incident_id) do
+    update_state(client, account_id, site_id, incident_id, %{ignored: false})
+  end
+
+  def unresolve(client, account_id, site_id, incident_id) do
+    update_state(client, account_id, site_id, incident_id, %{resolved: false})
+  end
+
+  def unblock(client, account_id, site_id, incident_id) do
+    update_state(client, account_id, site_id, incident_id, %{blocked: false})
+  end
+
+  # Blocked, resolved, or ignored
   def update_state(client, account_id, site_id, incident_id, new_state) do
     {:ok,
      %{
        "data" => record
-     }} = Client.put(client, "/accounts/#{account_id}/sites/#{site_id}/incidents/#{incident_id}", %{state: new_state})
+     }} = Client.put(client, "/accounts/#{account_id}/sites/#{site_id}/incidents/#{incident_id}", new_state)
   end
 end
