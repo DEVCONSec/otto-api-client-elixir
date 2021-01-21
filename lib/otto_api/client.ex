@@ -43,19 +43,38 @@ defmodule OttoApi.Client do
 
   defp request_with_body(verb, client, path, body) do
     with {:ok, json} <- Jason.encode(body) do
-      {:ok, response} =
-        apply(@http_client, verb, [full_url(client.base_url, path), json, headers(client), []])
+      case apply(@http_client, verb, [full_url(client.base_url, path), json, headers(client), []]) do
+        {:ok, response} ->
+          case response.status_code do
+            code when code >= 200 and code < 300 ->
+              case response.body do
+                "" -> {:ok, %{}}
+                _ -> Jason.decode(response.body)
+              end
 
-      case response.body do
-        "" -> {:ok, %{}}
-        _ -> Jason.decode(response.body)
+            401 ->
+              {:error, "Error authenticating user"}
+
+            403 ->
+              {:error, "Error authorizing user"}
+
+            404 ->
+              {:error, "Resource missing"}
+
+            500 ->
+              {:error, "Unknown Server Error"}
+
+            _ ->
+              {:error, %{status_code: response.status_code, body: response.body}}
+          end
       end
     end
   end
 
   defp request_without_body(verb, client, path) do
     case apply(@http_client, verb, [full_url(client.base_url, path), headers(client), []]) do
-      {:ok, response} -> case response.status_code do
+      {:ok, response} ->
+        case response.status_code do
           code when code >= 200 and code < 300 -> Jason.decode(response.body)
           401 -> {:error, "Error authenticating user"}
           403 -> {:error, "Error authorizing user"}

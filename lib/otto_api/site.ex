@@ -37,20 +37,24 @@ defmodule OttoApi.Site do
 
         {:ok, sites}
 
-      {:error, details} -> {:error, details}
+      {:error, details} ->
+        {:error, details}
     end
   end
 
   def create(client, account_id, site_attributes) do
-    {:ok, %{"data" => site_attributes}} =
-      Client.post(client, "/accounts/#{account_id}/sites", %{"site" => site_attributes})
+    case Client.post(client, "/accounts/#{account_id}/sites", %{"site" => site_attributes}) do
+      {:ok, %{"data" => site_attributes}} ->
+        {:ok,
+         %__MODULE__{
+           id: site_attributes["id"],
+           url: site_attributes["url"],
+           account_id: account_id,
+           inserted_at: site_attributes["inserted_at"]
+         }}
 
-    {:ok,
-     %__MODULE__{
-       id: site_attributes["id"],
-       url: site_attributes["url"],
-       account_id: account_id,
-       inserted_at: site_attributes["inserted_at"]
-     }}
+      anything_else ->
+        anything_else
+    end
   end
 end
