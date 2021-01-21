@@ -25,7 +25,8 @@ defmodule OttoApi.Account do
   end
 
   def create(client, account_attributes) do
-    {:ok, %{"data" => account_attributes}}= Client.post(client, "/accounts", %{"account" => account_attributes})
+    {:ok, %{"data" => account_attributes}} =
+      Client.post(client, "/accounts", %{"account" => account_attributes})
 
     {:ok,
      %__MODULE__{

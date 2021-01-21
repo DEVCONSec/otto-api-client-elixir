@@ -93,7 +93,6 @@ defmodule OttoApi.Incident do
        "data" => record
      }} = Client.get(client, "/accounts/#{account_id}/sites/#{site_id}/incidents/#{incident_id}")
 
-
     %{
       "id" => id,
       "account_id" => account_id,
@@ -162,6 +161,11 @@ defmodule OttoApi.Incident do
     {:ok,
      %{
        "data" => record
-     }} = Client.put(client, "/accounts/#{account_id}/sites/#{site_id}/incidents/#{incident_id}", new_state)
+     }} =
+      Client.put(
+        client,
+        "/accounts/#{account_id}/sites/#{site_id}/incidents/#{incident_id}",
+        new_state
+      )
   end
 end

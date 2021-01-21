@@ -13,29 +13,32 @@ defmodule OttoApi.Site do
              inserted_at: binary
            })}
   def all(client, account_id) do
-    {:ok,
-     %{
-       "data" => records
-     }} = Client.get(client, "/accounts/#{account_id}/sites")
+    case Client.get(client, "/accounts/#{account_id}/sites") do
+      {:ok,
+       %{
+         "data" => records
+       }} ->
+        sites =
+          Enum.map(records, fn record ->
+            %{
+              "id" => id,
+              "url" => url,
+              "account_id" => account_id,
+              "inserted_at" => inserted_at
+            } = record
 
-    sites =
-      Enum.map(records, fn record ->
-        %{
-          "id" => id,
-          "url" => url,
-          "account_id" => account_id,
-          "inserted_at" => inserted_at
-        } = record
+            %__MODULE__{
+              id: id,
+              url: url,
+              account_id: account_id,
+              inserted_at: inserted_at
+            }
+          end)
 
-        %__MODULE__{
-          id: id,
-          url: url,
-          account_id: account_id,
-          inserted_at: inserted_at
-        }
-      end)
+        {:ok, sites}
 
-    {:ok, sites}
+      {:error, details} -> {:error, details}
+    end
   end
 
   def create(client, account_id, site_attributes) do

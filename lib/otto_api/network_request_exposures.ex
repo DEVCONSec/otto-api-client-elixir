@@ -43,5 +43,4 @@ defmodule OttoApi.NetworkExposureAggregation do
        unique_mobile: unique_mobile
      }}
   end
-
 end
