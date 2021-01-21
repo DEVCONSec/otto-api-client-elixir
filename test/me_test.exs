@@ -48,10 +48,6 @@ defmodule MeTest do
     |> expect(:get, fn _url, _headers, _options -> {:ok, %{status_code: 404, body: stub_json}} end)
 
     assert OttoApi.Me.get(api) ==
-             {:error,
-              %{
-                body: "{\n  \"errors\": {\n    \"detail\": \"Not found\"\n  }\n}\n",
-                status_code: 404
-              }}
+             {:error, "Resource missing" }
   end
 end
