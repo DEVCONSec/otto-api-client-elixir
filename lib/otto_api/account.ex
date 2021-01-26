@@ -1,6 +1,6 @@
 defmodule OttoApi.Account do
   @enforce_keys [:name, :description]
-  defstruct @enforce_keys ++ [:id, :inserted_at]
+  defstruct @enforce_keys ++ [:id, :inserted_at, :referral_source]
 
   alias OttoApi.Client
 
