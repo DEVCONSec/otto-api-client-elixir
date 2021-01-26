@@ -89,8 +89,11 @@ defmodule OttoApi.NetworkRequest do
     {:ok,
      %{
        "data" => record
-     }} = Client.get(client, "/accounts/#{account_id}/sites/#{site_id}/network_requests/#{network_request_id}")
-
+     }} =
+      Client.get(
+        client,
+        "/accounts/#{account_id}/sites/#{site_id}/network_requests/#{network_request_id}"
+      )
 
     %{
       "id" => id,
@@ -111,20 +114,20 @@ defmodule OttoApi.NetworkRequest do
 
     network_request = %__MODULE__{
       id: id,
-          hostname: hostname,
-          url: url,
-          path: path,
-          initiator: initiator,
-          request_type: request_type,
-          severity: severity,
-          site_id: site_id,
-          ignored: ignored,
-          resolved: resolved,
-          blocked: blocked,
-          is_blocked: is_blocked,
-          first_seen: first_seen,
-          url_found_on: url_found_on,
-          last_seen: last_seen
+      hostname: hostname,
+      url: url,
+      path: path,
+      initiator: initiator,
+      request_type: request_type,
+      severity: severity,
+      site_id: site_id,
+      ignored: ignored,
+      resolved: resolved,
+      blocked: blocked,
+      is_blocked: is_blocked,
+      first_seen: first_seen,
+      url_found_on: url_found_on,
+      last_seen: last_seen
     }
 
     {:ok, network_request}

@@ -5,7 +5,6 @@ defmodule NetworkMonitorTest do
   setup :verify_on_exit!
 
   test "get network_requests" do
-
     stub_json = """
     {"data":[{
       "id":"123456",
@@ -55,7 +54,6 @@ defmodule NetworkMonitorTest do
               ]}
   end
 
-
   test "get network exposure aggregations" do
     stub_json = """
     {"data":{
@@ -81,7 +79,4 @@ defmodule NetworkMonitorTest do
                 unique_desktop: 6
               }}
   end
-
-
-
 end

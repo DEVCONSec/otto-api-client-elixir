@@ -23,7 +23,14 @@ defmodule MeTest do
     |> expect(:get, fn _url, _headers, _options -> {:ok, %{status_code: 200, body: stub_json}} end)
 
     assert OttoApi.Me.get(api) ==
-             {:ok, %OttoApi.Me{account_id: "12345", auth0_user_id: "12345", id: "12345", account_name: "hello", account_description: "wow"}}
+             {:ok,
+              %OttoApi.Me{
+                account_id: "12345",
+                auth0_user_id: "12345",
+                id: "12345",
+                account_name: "hello",
+                account_description: "wow"
+              }}
   end
 
   test "canNOT get me" do
@@ -41,10 +48,6 @@ defmodule MeTest do
     |> expect(:get, fn _url, _headers, _options -> {:ok, %{status_code: 404, body: stub_json}} end)
 
     assert OttoApi.Me.get(api) ==
-             {:error,
-              %{
-                body: "{\n  \"errors\": {\n    \"detail\": \"Not found\"\n  }\n}\n",
-                status_code: 404
-              }}
+             {:error, "Resource missing" }
   end
 end
