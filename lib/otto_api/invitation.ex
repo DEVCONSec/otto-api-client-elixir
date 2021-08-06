@@ -4,8 +4,8 @@ defmodule OttoApi.Invitation do
 
   alias OttoApi.Client
 
-  def accept(client, account_id, secret_key) do
-    case Client.put(client, "/accounts/#{account_id}/invitations/#{secret_key}", %{"invitation" => %{"accepted" =>  true}}) do
+  def accept(client, secret_key) do
+    case Client.put(client, "/invitation/accept", %{"id" => secret_key, "invitation" => %{"accepted" =>  true}}) do
       {:ok, %{"data" => invitation_attributes}} ->
         {:ok,
          %__MODULE__{
