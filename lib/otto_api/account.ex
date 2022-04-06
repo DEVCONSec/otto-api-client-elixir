@@ -44,4 +44,20 @@ defmodule OttoApi.Account do
         anything_else
     end
   end
+
+  def update(client, account_id, account_attributes) do
+    case Client.post(client, "/accounts/#{account_id}", %{"account" => account_attributes}) do
+      {:ok, %{"data" => account_attributes}} ->
+        {:ok,
+         %__MODULE__{
+           id: account_attributes["id"],
+           name: account_attributes["name"],
+           description: account_attributes["description"],
+           inserted_at: account_attributes["inserted_at"]
+         }}
+
+      anything_else ->
+        anything_else
+    end
+  end
 end
