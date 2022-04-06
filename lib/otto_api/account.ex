@@ -46,7 +46,7 @@ defmodule OttoApi.Account do
   end
 
   def update(client, account_id, account_attributes) do
-    case Client.post(client, "/accounts/#{account_id}", %{"account" => account_attributes}) do
+    case Client.patch(client, "/accounts/#{account_id}", %{"account" => account_attributes}) do
       {:ok, %{"data" => account_attributes}} ->
         {:ok,
          %__MODULE__{
